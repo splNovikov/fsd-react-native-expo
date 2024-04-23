@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
   container: {
     minHeight: '100%',
     paddingVertical: 16,
-    backgroundColor: '#eee999',
+    backgroundColor: 'fff',
   },
 });
