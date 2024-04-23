@@ -1,7 +1,7 @@
 import Checkbox from 'expo-checkbox';
 import { Text, TouchableOpacity } from 'react-native';
-import { taskLib, taskModel } from 'entities/task';
-import { useTaskDispatch } from 'shared';
+// import { taskLib, taskModel } from 'entities/task';
+// import { useTaskDispatch } from 'shared';
 
 export type ToggleTaskProps = {
   taskId: number;
@@ -9,20 +9,17 @@ export type ToggleTaskProps = {
 };
 
 export const ToggleTask = ({ taskId, withStatus }: ToggleTaskProps) => {
-  const dispatch = useTaskDispatch();
-  const task = taskModel.selectors.useTask(taskId);
+  // const dispatch = useTaskDispatch();
+  // const task = taskModel.selectors.useTask(taskId);
 
-  if (!task) return null;
+  // if (!task) return null;
 
-  const onToggle = () => dispatch(taskModel.actions.toggleTask(taskId));
-  const status = taskLib.getTaskStatus(task);
+  // const onToggle = () => dispatch(taskModel.actions.toggleTask(taskId));
+  const onToggle = () => console.log('toggle');
+  // const status = taskLib.getTaskStatus(task);
 
   const checkbox = (
-    <Checkbox
-      className="mx-2"
-      onValueChange={onToggle}
-      value={task.completed}
-    />
+    <Checkbox className="mx-2" onValueChange={onToggle} value={true} />
   );
 
   return withStatus ? (

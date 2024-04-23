@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { ReactNode } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import type { Task, NavProp } from 'shared';
+import type { NavProp } from 'shared';
+import { Task } from 'entities/task/task.types';
 
 type TaskRowProps = {
   data: Task;

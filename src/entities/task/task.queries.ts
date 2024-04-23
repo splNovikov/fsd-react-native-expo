@@ -1,14 +1,19 @@
-import { infiniteQueryOptions } from '@tanstack/react-query';
+import {
+  infiniteQueryOptions,
+  queryOptions as tsqQueryOptions,
+} from '@tanstack/react-query';
 // import { StoreApi } from 'zustand';
 // eslint-disable-next-line no-restricted-imports
 import { queryClient } from 'shared/lib/react-query';
 import { tasksQuery } from './task.api';
 // import { State } from './task.model';
-import { FilterQuery, Task } from './task.types';
+import { FilterQuery, Task, Tasks } from './task.types';
 
 const keys = {
   root: () => ['article'],
   task: (slug: string | number) => [...keys.root(), 'bySlug', slug],
+  query: () => [...keys.root(), 'query'],
+  queryByFilter: (filter: FilterQuery) => [...keys.query(), 'byFilter', filter],
   infinityQuery: () => [...keys.root(), 'infinityQuery'],
   infinityQueryByFilter: (filter: FilterQuery) => [
     ...keys.infinityQuery(),
@@ -31,20 +36,40 @@ export const taskService = {
   removeCache: (slug: string) =>
     queryClient.removeQueries({ queryKey: taskService.queryKey(slug) }),
 
-  // queryOptions: (slug: string) => {
-  //   const articleKey = articleService.queryKey(slug);
-  //   return tsqQueryOptions({
-  //     queryKey: articleKey,
-  //     queryFn: async ({ signal }) => {
-  //       const article = await articleQuery({ slug }, signal);
-  //       profileService.setCache(article.author);
-  //       return article;
-  //     },
-  //     initialData: () => articleService.getCache(slug)!,
-  //     initialDataUpdatedAt: () =>
-  //       queryClient.getQueryState(articleKey)?.dataUpdatedAt,
-  //   });
-  // },
+  // prefetchQuery: async (slug: string) =>
+  //   queryClient.prefetchQuery(articleService.queryOptions(slug)),
+  //
+  // ensureQueryData: async (slug: string) =>
+  //   queryClient.ensureQueryData(articleService.queryOptions(slug)),
+};
+
+export const tasksService = {
+  queryKey: (filterQuery: FilterQuery) => keys.queryByFilter(filterQuery),
+
+  getCache: (filterQuery: FilterQuery) =>
+    queryClient.getQueryData<Tasks>(tasksService.queryKey(filterQuery)),
+
+  queryOptions: () => {
+    const pageQuery = { offset: 0, limit: 10 };
+    const filterQuery = {};
+    const tasksKey = infinityTasksService.queryKey(filterQuery);
+
+    return tsqQueryOptions({
+      queryKey: tasksKey,
+      queryFn: async ({ signal }) => {
+        const tasks = await tasksQuery({ query: { ...pageQuery } }, signal);
+
+        tasks.forEach(task => {
+          taskService.setCache(task);
+        });
+
+        return tasks;
+      },
+      initialData: () => tasksService.getCache(filterQuery)!,
+      initialDataUpdatedAt: () =>
+        queryClient.getQueryState(tasksKey)?.dataUpdatedAt,
+    });
+  },
 
   // prefetchQuery: async (slug: string) =>
   //   queryClient.prefetchQuery(articleService.queryOptions(slug)),

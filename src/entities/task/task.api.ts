@@ -6,6 +6,7 @@ import { zodContract } from 'shared/lib/zod';
 import type { TasksQueryDto } from './task.types';
 
 export async function tasksQuery(
+  // todo: remove
   params: { query: TasksQueryDto },
   signal?: AbortSignal,
 ) {
