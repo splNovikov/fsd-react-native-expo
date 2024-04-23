@@ -1,7 +1,6 @@
 import React, { useReducer } from 'react';
 import { View } from 'react-native';
-// import { taskModel } from 'entities/task';
-import { RadioButton, RadioButtonGroup } from 'shared';
+import { RadioButton, RadioButtonGroup } from 'shared/ui/radio';
 
 const resetFilters = {
   all: false,
@@ -10,8 +9,6 @@ const resetFilters = {
 };
 
 export const TasksFilters = () => {
-  // const dispatch = useTaskDispatch();
-  // const isLoading = taskModel.selectors.areTasksLoading();
   const isLoading = false;
 
   const [radioMap, updateRadioMap] = useReducer(

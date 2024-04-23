@@ -1,14 +1,20 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// import { Provider } from 'react-redux';
-import { Routing } from './routes';
-// import { store } from './store';
+import { withErrorBoundary } from 'react-error-boundary';
+import { withSuspense } from 'shared/lib/react';
+import { FullPageError } from 'shared/ui/full-page-error';
+import { QueryClientProvider, Routing } from 'app/providers';
+import { Loading } from 'shared/ui/loading';
 
-const queryClient = new QueryClient();
+function Providers() {
+  return (
+    <QueryClientProvider>
+      <Routing />
+    </QueryClientProvider>
+  );
+}
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <Routing />
-  </QueryClientProvider>
-);
-
-export default App;
+const SuspensedProvider = withSuspense(Providers, {
+  fallback: <Loading />,
+});
+export const Provider = withErrorBoundary(SuspensedProvider, {
+  fallbackRender: ({ error }) => <FullPageError error={error} />,
+});

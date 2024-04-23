@@ -1,3 +1,2 @@
-export * from "./task-add";
-export * from "./task-filters";
-export * from "./toggle-task";
+export * from './task-filters';
+export * from './toggle-task';
