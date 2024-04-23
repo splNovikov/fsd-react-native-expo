@@ -13,8 +13,7 @@ export const TaskRow = ({ data, before }: TaskRowProps) => {
   const { id, title, completed } = data;
   const { navigate } = useNavigation<NavProp<'Tasks'>>();
 
-  // const onTaskPress = () => navigate('Task', { id });
-  const onTaskPress = () => console.log('navigate');
+  const onTaskPress = () => navigate('Task', { id });
 
   return (
     <TouchableOpacity onPress={onTaskPress}>
