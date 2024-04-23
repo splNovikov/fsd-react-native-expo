@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { FC } from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { TasksListWidget } from 'widgets/tasks-list';
 import { TasksFilters } from 'features';
 import { ScreenProps } from 'shared/lib/router';

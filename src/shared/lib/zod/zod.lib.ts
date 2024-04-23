@@ -39,7 +39,7 @@ export function zodContract<D>(data: ZodType<D>): Contract<unknown, D> {
         return [];
       }
 
-      return validation.error?.errors.map(e => {
+      return validation.error.errors.map(e => {
         const path = e.path.join('.');
         return path !== '' ? `${e.message}, path: ${path}` : e.message;
       });
