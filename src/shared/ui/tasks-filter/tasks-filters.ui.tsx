@@ -21,12 +21,6 @@ export const TasksFilters = () => {
 
   const onRadioButtonPress = (key: keyof Filters) => {
     updateRadioMap(key);
-
-    // dispatch(
-    //   taskModel.actions.setQueryConfig({
-    //     completed: key === 'all' ? undefined : key === 'closed',
-    //   }),
-    // );
   };
 
   return (

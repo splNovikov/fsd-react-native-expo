@@ -5,7 +5,10 @@ import { Empty } from 'shared/ui/empty';
 import { Loading } from 'shared/ui/loading';
 import { TaskRow } from 'widgets/tasks-list/task.row.ui';
 
-export const TasksListWidget = () => {
+type TasksListWidgetProps = {
+  tasksFilter: string;
+};
+export const TasksListWidget = ({ tasksFilter }: TasksListWidgetProps) => {
   const { data, isLoading } = useQuery(taskQueries.tasksService.queryOptions());
 
   // const filteredTasks = taskModel.selectors.getFilteredTasks();
