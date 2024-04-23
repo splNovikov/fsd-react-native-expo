@@ -35,8 +35,6 @@ export function zodContract<D>(data: ZodType<D>): Contract<unknown, D> {
     getErrorMessages(raw) {
       const validation = data.safeParse(raw);
 
-      console.log(validation);
-
       if (validation.success) {
         return [];
       }
