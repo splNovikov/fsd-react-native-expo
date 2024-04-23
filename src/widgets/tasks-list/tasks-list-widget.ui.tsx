@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { FlatList, StyleSheet } from 'react-native';
 import { taskQueries } from 'entities/task';
 import { Empty } from 'shared/ui/empty';
@@ -6,9 +6,8 @@ import { Loading } from 'shared/ui/loading';
 import { TaskRow } from './task-row';
 
 export const TasksListWidget = () => {
-  const { data, isLoading } = useSuspenseQuery(
-    taskQueries.tasksService.queryOptions(),
-  );
+  const { data, isLoading } = useQuery(taskQueries.tasksService.queryOptions());
+
   // const filteredTasks = taskModel.selectors.getFilteredTasks();
 
   if (isLoading) return <Loading />;

@@ -12,9 +12,9 @@ export function FullPageError(props: FullPageErrorProps) {
   return (
     <View style={styles.outerWrapper}>
       <View style={styles.innerWrapper}>
-        <View className="container">
-          <Text className="logo-font">Something went wrong:</Text>
-          <ErrorHandler error={error} size="small" />
+        <View>
+          <Text>Something went wrong:</Text>
+          <ErrorHandler error={error} size="Small" />
         </View>
       </View>
     </View>
