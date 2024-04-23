@@ -41,22 +41,15 @@ export async function createApiRequest(config: ApiConfig) {
 
   const clonedResponse = response.clone();
 
-  // todo: (pavel) remove this, or replace with axios?
-  // const data = !response.body
-  //   ? null
-  //   : await response.json().catch(async error => {
-  //       throw preparationError({
-  //         response: await clonedResponse.text(),
-  //         reason: error?.message ?? null,
-  //       });
-  //     });
-  //
-  // return data;
+  const data =
+    !response.body && !response.json
+      ? null
+      : await response.json().catch(async error => {
+          throw preparationError({
+            response: await clonedResponse.text(),
+            reason: error?.message ?? null,
+          });
+        });
 
-  return await response.json().catch(async error => {
-    throw preparationError({
-      response: await clonedResponse.text(),
-      reason: error?.message ?? null,
-    });
-  });
+  return data;
 }
