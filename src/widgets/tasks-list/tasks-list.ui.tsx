@@ -4,20 +4,20 @@ import { taskQueries } from 'entities/task';
 import { Empty } from 'shared/ui/empty';
 import { Loading } from 'shared/ui/loading';
 import { TaskRow } from 'widgets/tasks-list/task.row.ui';
+import { useTasksFilter } from 'widgets/tasks-list/tasks-list.lib';
 
 type TasksListWidgetProps = {
   tasksFilter: string;
 };
-export const TasksListWidget = ({ tasksFilter }: TasksListWidgetProps) => {
+export const TasksList = ({ tasksFilter }: TasksListWidgetProps) => {
   const { data, isLoading } = useQuery(taskQueries.tasksService.queryOptions());
-
-  // const filteredTasks = taskModel.selectors.getFilteredTasks();
+  const { filteredTasks } = useTasksFilter(data, tasksFilter);
 
   if (isLoading) return <Loading />;
 
   return (
     <FlatList
-      data={data}
+      data={filteredTasks}
       contentContainerStyle={styles.container}
       keyExtractor={item => item.id.toString()}
       renderItem={({ item }) => <TaskRow data={item} />}

@@ -1,6 +1,6 @@
 import { createStore } from 'zustand';
 import { DevtoolsOptions, devtools } from 'zustand/middleware';
-import { tasksFilterModel } from 'shared/ui/tasks-filter';
+import { tasksFilterModel } from 'shared/ui/tasks-filters';
 
 type TasksFilter = 'all' | 'open' | 'completed';
 
@@ -21,3 +21,7 @@ export const tasksFilterStore = createStore<
     tasksFilterStoreDevtoolsOptions,
   ),
 );
+
+export const onTasksFilter = (tasksFilter: TasksFilter) => {
+  tasksFilterStore.getState().changeTasksFilter(tasksFilter);
+};

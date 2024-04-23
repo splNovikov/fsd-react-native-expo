@@ -5,12 +5,13 @@ import { RadioButton, RadioButtonGroup } from 'shared/ui/radio';
 const resetFilters = {
   all: false,
   open: false,
-  closed: false,
+  completed: false,
 };
 
-export const TasksFilters = () => {
-  const isLoading = false;
-
+type TasksFiltersProps = {
+  onTasksFilter: (tasksFilter: 'all' | 'open' | 'completed') => void;
+};
+export const TasksFilters = ({ onTasksFilter }: TasksFiltersProps) => {
   const [radioMap, updateRadioMap] = useReducer(
     (_: Filters, n: keyof Filters) => ({
       ...resetFilters,
@@ -21,6 +22,7 @@ export const TasksFilters = () => {
 
   const onRadioButtonPress = (key: keyof Filters) => {
     updateRadioMap(key);
+    onTasksFilter(key);
   };
 
   return (
@@ -31,7 +33,6 @@ export const TasksFilters = () => {
             key={key}
             label={`${key}:`}
             selected={radioMap[key as keyof Filters]}
-            disabled={isLoading}
             onValueChange={_ => onRadioButtonPress(key as keyof Filters)}
           />
         ))}

@@ -1,1 +1,1 @@
-export * from './tasks-list-widget.ui';
+export * from './tasks-list.ui';
