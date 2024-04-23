@@ -18,7 +18,7 @@ export const TaskRow = ({ data, before }: TaskRowProps) => {
 
   return (
     <TouchableOpacity onPress={onTaskPress}>
-      <View className="flex-row items-center h-12 bg-zinc-50 my-2 mx-4 rounded-lg shadow shadow-slate-300">
+      <View className="flex-row items-center h-12 bg-zinc-50 px-2 my-2 mx-4 rounded-lg shadow shadow-slate-300">
         {before}
         <Text
           numberOfLines={2}

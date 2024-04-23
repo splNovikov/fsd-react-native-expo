@@ -7,7 +7,7 @@ import { ScreenProps } from 'shared/lib/router';
 
 export const TasksScreen: FC<ScreenProps<'Tasks'>> = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView className="flex-1">
       <TasksFilters />
       <TasksListWidget />
       <StatusBar style="auto" />
