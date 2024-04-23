@@ -3,7 +3,7 @@ import { FlatList, StyleSheet } from 'react-native';
 import { taskQueries } from 'entities/task';
 import { Empty } from 'shared/ui/empty';
 import { Loading } from 'shared/ui/loading';
-import { TaskRow } from './task-row';
+import { TaskRow } from 'widgets/tasks-list/task.row.ui';
 
 export const TasksListWidget = () => {
   const { data, isLoading } = useQuery(taskQueries.tasksService.queryOptions());
