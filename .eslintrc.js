@@ -12,7 +12,7 @@ module.exports = {
           {
             allow: [
               '**/ui/*',
-              'pages/*',
+              'screens/*',
               'processes/*',
               'widgets/*',
               'features/*',
