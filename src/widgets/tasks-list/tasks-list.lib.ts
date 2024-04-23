@@ -1,10 +1,7 @@
 import { useMemo } from 'react';
 import { Tasks } from 'entities/task/task.types';
 
-export const useTasksFilter = (
-  tasks: Tasks,
-  filter: 'all' | 'completed' | 'open',
-) => {
+export const useTasksFilter = (tasks: Tasks, filter: string) => {
   const filteredTasks = useMemo(() => {
     return tasks?.filter(task => {
       if (filter === 'completed') {
